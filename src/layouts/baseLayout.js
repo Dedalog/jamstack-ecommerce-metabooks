@@ -22,7 +22,15 @@ toast.configure({
 
 class Layout extends React.Component {
   componentDidMount() {
-    window.DedalogCommerce.create(process.env.GATSBY_DEDALOG_COMMERCE_APIKEY)
+    const script = document.createElement("script")
+    script.setAttribute("src", "https://cdn.dedalog.com.br/dedalog-commerce.js")
+    script.setAttribute(
+      "onLoad",
+      `DedalogCommerce.create("${process.env.GATSBY_DEDALOG_COMMERCE_APIKEY}");`
+    )
+    script.setAttribute("type", "text/javascript")
+    script.setAttribute("charset", "utf8")
+    window.document.body.appendChild(script)
   }
 
   render() {
@@ -31,15 +39,14 @@ class Layout extends React.Component {
     return (
       <ContextProviderComponent>
         <SiteContext.Consumer>
-          {context => {
-            // console.log('baselayout rerendering...')
+          {(context) => {
             let {
               navItems: {
                 navInfo: { data: links },
               },
             } = context
 
-            links = links.map(link => ({
+            links = links.map((link) => ({
               name: titleIfy(link),
               link: "/" + slugify(link),
             }))
@@ -100,7 +107,6 @@ class Layout extends React.Component {
                     </div>
                   </footer>
                 </div>
-                <script src="https://cdn.dedalog.com.br/dedalog-commerce.js" />
               </>
             )
           }}

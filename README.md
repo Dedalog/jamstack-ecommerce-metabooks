@@ -29,6 +29,9 @@ $ npm install
 3. Este projeto usa variáveis de ambiente `.env.development` e `.env.production` para configurar as APIs de acesso. Crie estes arquivos com suas credenciais de acesso da Metabooks, o id da sua editora na Metabooks e a chave de API do Dedalog Commerce conforme o modelo abaixo:
 
 ```sh
+# O endpoint oficial da METABOOKS
+METABOOKS_ENDPOINT=https://www.metabooks.com/api/v2
+
 # São três chaves de API da Metabooks necessárias: a de METADATA, a de COVER e a de MMO.
 METABOOKS_API_KEYS_METADATA=
 METABOOKS_API_KEYS_MMO=
@@ -38,7 +41,7 @@ METABOOKS_API_KEYS_COVER=
 PUBLISHER_IDS=["SELO1", "SELO2", "SELO3"]
 
 # Chave de API do Dedalog Commerce. Se você ainda não possui acesso ao Dedalgo Commerce deixe em branco para testar
-GATSBY_DEDALOG_COMMERCE_APIKEY=
+GATSBY_DEDALOG_COMMERCE_APIKEY=123456
 ```
 
 4. Substituia o logo padrão na pasta `src/images/logo.png` pelo logo da sua editora
