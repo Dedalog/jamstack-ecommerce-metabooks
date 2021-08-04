@@ -1,0 +1,61 @@
+{
+  "name": "jamstack-ecommerce-metabooks",
+  "private": true,
+  "description": "An E Commerce starter for Gatsby",
+  "version": "0.1.0",
+  "author": "Nader Dabit <dabit3@gmail.com>, Dedalog Commerce <contato@dedalog.com.br>",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "esm": "^3.2.25",
+    "fs": "^0.0.1-security",
+    "gatsby": "^3.10.2",
+    "gatsby-image": "^3.10.0",
+    "gatsby-plugin-image": "^1.10.1",
+    "gatsby-plugin-layout": "^2.10.0",
+    "gatsby-plugin-manifest": "^3.10.0",
+    "gatsby-plugin-offline": "^4.10.0",
+    "gatsby-plugin-postcss": "^4.10.0",
+    "gatsby-plugin-react-helmet": "^4.10.0",
+    "gatsby-plugin-remove-serviceworker": "^1.0.0",
+    "gatsby-plugin-sharp": "^3.10.2",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
+    "gatsby-source-filesystem": "^3.10.0",
+    "gatsby-transformer-sharp": "^3.10.0",
+    "graphql": "^15.5.1",
+    "graphql-tag": "^2.10.3",
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-country-region-selector": "^3.2.0",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "react-icons": "^4.2.0",
+    "react-toastify": "^7.0.4",
+    "reactjs-popup": "^2.0.5",
+    "tailwindcss": "^2.2.7",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dabit3/gatsby-ecommerce-professional"
+  },
+  "bugs": {
+    "url": "https://github.com/dabit3/gatsby-ecommerce-professional/issues"
+  }
+}
