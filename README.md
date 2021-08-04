@@ -2,13 +2,13 @@
 
 A partir de um fork do [jamstack-cms/jamstack-ecommerce](https://github.com/jamstack-cms/jamstack-ecommerce/tree/master), este projeto cria lojas com o GatsbyJS integrados a API da [Metabooks](https://metabooks.com/) e com a plataforma de Headless Commerce da [Dedalog](https://dedalog.com.br).
 
-### Alguns exemplos gerados com a plataforma
+#### Alguns exemplos gerados com a plataforma
 
 - [Editora Zouk](https://dedalog-commerce-zouk.netlify.app/)
 - [Buzz Editora](https://dedalog-commerce-buzz.netlify.app/)
 - [Ubu Editora](https://dedalog-commerce-ubu.netlify.app/)
 
-### Para configurar o gerador de websites do Gatsby, siga os seguintes passos:
+#### Para configurar o gerador de websites do Gatsby, siga os seguintes passos:
 
 1. Clone este projeto
 
@@ -56,6 +56,8 @@ $ gatsby develop
 $ gatsby build
 ```
 
-### Tailwind
+#### Tailwind
 
 O projeto usa o Tailwind como framework CSS. Para saber mais sobre o Tailwind clique [aqui](https://tailwindcss.com/docs).
+
+[![netlifybutton](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Dedalog/jamstack-ecommerce-metabooks)
