@@ -4,9 +4,9 @@ A partir de um fork do [jamstack-cms/jamstack-ecommerce](https://github.com/jams
 
 ### Alguns exemplos gerados com a plataforma
 
-. [Editora Zouk] (https://dedalog-commerce-zouk.netlify.app/)
-. [Buzz Editora] (https://dedalog-commerce-buzz.netlify.app/)
-. [Ubu Editora] ((https://dedalog-commerce-ubu.netlify.app/)
+- [Editora Zouk](https://dedalog-commerce-zouk.netlify.app/)
+- [Buzz Editora](https://dedalog-commerce-buzz.netlify.app/)
+- [Ubu Editora](https://dedalog-commerce-ubu.netlify.app/)
 
 ### Para configurar o gerador de websites do Gatsby, siga os seguintes passos:
 
