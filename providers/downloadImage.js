@@ -1,7 +1,6 @@
 import fs from "fs"
 import path from "path"
 import axios from "axios"
-import { getHeader } from "./inventoryHelper"
 
 export function getImageKey(url) {
   const split = url.split("/")
@@ -29,11 +28,8 @@ async function downloadImage(url, imageKey) {
     const path = getPathName(url, imageKey)
     const writer = fs.createWriteStream(path)
 
-    const request_type = "cover"
-    const header = getHeader(request_type)
     try {
       const response = await axios.get(url, {
-        headers: header,
         responseType: "stream",
       })
       response.data.pipe(writer)

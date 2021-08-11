@@ -1,9 +1,5 @@
 [build.environment]
-  METABOOKS_ENDPOINT="https://www.metabooks.com/api/v2"
-
-  METABOOKS_API_KEYS_METADATA="######"
-  METABOOKS_API_KEYS_MMO="######"
-  METABOOKS_API_KEYS_COVER="######"
+  MERCADOEDITORIAL_ENDPOINT="https://api.mercadoeditorial.org/api/v1.2"
 
   PUBLISHER_IDS=["SELO1", "SELO2", "SELO3"]
 

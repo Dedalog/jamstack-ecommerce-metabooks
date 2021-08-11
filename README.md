@@ -1,19 +1,17 @@
-## JAMstack Metabooks Ecommerce
+## JAMstack MercadoEditorial.org Ecommerce
 
-A partir de um fork do [jamstack-cms/jamstack-ecommerce](https://github.com/jamstack-cms/jamstack-ecommerce/tree/master), este projeto cria lojas com o GatsbyJS integrados a API da [Metabooks](https://metabooks.com/) e com a plataforma de Headless Commerce da [Dedalog](https://dedalog.com.br).
+A partir de um fork do [jamstack-cms/jamstack-ecommerce](https://github.com/jamstack-cms/jamstack-ecommerce/tree/master), este projeto cria lojas com o GatsbyJS integrados a API da [Mercado Editorial](https://www.mercadoeditorial.org/) e com a plataforma de Headless Commerce da [Dedalog](https://dedalog.com.br).
 
-#### Alguns exemplos gerados com a plataforma
+#### Um exemplo gerados com a plataforma
 
-- [Editora Zouk](https://dedalog-commerce-zouk.netlify.app/)
-- [Buzz Editora](https://dedalog-commerce-buzz.netlify.app/)
-- [Ubu Editora](https://dedalog-commerce-ubu.netlify.app/)
+- [Editora Veneta](https://dedalog-commerce-veneta.netlify.app/)
 
 #### Para configurar o gerador de websites do Gatsby, siga os seguintes passos:
 
 1. Clone este projeto
 
 ```sh
-$ git clone https://github.com/Dedalog/jamstack-ecommerce-metabooks.git
+$ git clone --branch provider-mercadoeditorial --single-branch https://github.com/Dedalog/jamstack-ecommerce-metabooks.git
 ```
 
 2. Instale todas as dependencias do projeto:
@@ -26,16 +24,11 @@ $ yarn
 $ npm install
 ```
 
-3. Este projeto usa variáveis de ambiente `.env.development` e `.env.production` para configurar as APIs de acesso. Crie estes arquivos com suas credenciais de acesso da Metabooks, o id da sua editora na Metabooks e a chave de API do Dedalog Commerce conforme o modelo abaixo:
+3. Este projeto usa variáveis de ambiente `.env.development` e `.env.production` para configurar as APIs de acesso. Crie estes arquivos com os ids dos selos da sua editora na MercadoEditoral.org e a chave de API do Dedalog Commerce conforme o modelo abaixo:
 
 ```sh
 # O endpoint oficial da METABOOKS
-METABOOKS_ENDPOINT=https://www.metabooks.com/api/v2
-
-# São três chaves de API da Metabooks necessárias: a de METADATA, a de COVER e a de MMO.
-METABOOKS_API_KEYS_METADATA=
-METABOOKS_API_KEYS_MMO=
-METABOOKS_API_KEYS_COVER=
+MERCADOEDITORIAL_ENDPOINT=https://api.mercadoeditorial.org/api/v1.2
 
 # Aqui vão os códigos da sua editora ou dos seus selos conforme cadastro da Metabooks. Por exemplo: BR0089671 é o selo Zahar da editora Companhia das Letras
 PUBLISHER_IDS=["SELO1", "SELO2", "SELO3"]
