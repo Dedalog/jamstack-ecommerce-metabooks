@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css"
 import { toast } from "react-toastify"
 import { colors } from "../theme"
 import logo from "../images/logo.png"
+import Search from "../components/Search"
 
 toast.configure({
   progressStyle: {
@@ -21,9 +22,19 @@ toast.configure({
 })
 
 class Layout extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      search: "",
+    }
+  }
+
   componentDidMount() {
     const script = document.createElement("script")
-    script.setAttribute("src", "https://cdn.dedalog.com.br/dedalog-commerce.js")
+    script.setAttribute(
+      "src",
+      "https://cdn.dedalog.com.br/dedalog-commerce_z2LQp2owuzaK6HU4LsbLAQc3RGufa9eniQM2H6pKGMqQ8QHbJg_v2.js"
+    )
     script.setAttribute(
       "onLoad",
       `DedalogCommerce.create("${process.env.GATSBY_DEDALOG_COMMERCE_APIKEY}");`
@@ -92,9 +103,47 @@ class Layout extends React.Component {
                         </div>
                       </div>
                     </div>
+
+                    <div className="flex justify-center mb-5">
+                      <div className="relative rounded-md shadow-sm">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <svg
+                            className="h-5 w-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                            />
+                          </svg>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Pesquisar livros"
+                          value={this.state.search}
+                          className="shadow appearance-none border-2 rounded py-2 px-3 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-red-500 transition duration-500 ease-in-out"
+                          onChange={(e) =>
+                            this.setState({ search: e.target.value })
+                          }
+                          onBlur={(e) => {
+                            this.state.search = ""
+                          }}
+                        />
+                      </div>
+                    </div>
                   </nav>
                   <div className="mobile:px-10 px-4 pb-10 flex justify-center">
-                    <main className="w-fw">{children}</main>
+                    <main className="w-fw">
+                      {this.state.search != "" ? (
+                        <Search term={this.state.search} />
+                      ) : (
+                        children
+                      )}
+                    </main>
                   </div>
                   <footer className="flex justify-center">
                     <div className="flex w-fw px-8 desktop:px-0 border-solid border-t border-gray-300 items-center">

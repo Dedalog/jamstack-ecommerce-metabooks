@@ -17,7 +17,7 @@ const Home = ({ data: gqlData }) => {
     <>
       <SEO title="Home" />
       <div className="flex flex-col items-center">
-        <div className="max-w-fw flex flex-col">
+        <div className="max-w-fw min-w-full flex flex-col">
           <div>
             <div className="flex flex-1 flex-wrap flex-row">
               {inventory.map((item, index) => {

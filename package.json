@@ -8,6 +8,7 @@
     "axios": "^0.21.1",
     "esm": "^3.2.25",
     "fs": "^0.0.1-security",
+    "fuse.js": "^6.4.6",
     "gatsby": "^3.10.2",
     "gatsby-image": "^3.10.0",
     "gatsby-plugin-image": "^1.10.1",
