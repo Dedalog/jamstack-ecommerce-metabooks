@@ -12,14 +12,14 @@ const mainQuery = graphql`
 const SiteContext = React.createContext()
 
 class ContextProviderComponent extends React.Component {
-  addToCart = item => {
-    window.DedalogCommerce.add(item.ean)
+  addToCart = (item) => {
+    return window.DedalogCommerce.add(item.ean)
   }
 
   render() {
     return (
       <StaticQuery query={mainQuery}>
-        {queryData => {
+        {(queryData) => {
           return (
             <SiteContext.Provider
               value={{
