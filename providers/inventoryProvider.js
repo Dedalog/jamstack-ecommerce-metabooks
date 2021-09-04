@@ -23,7 +23,13 @@ async function listBooks_by_publisher_id(publisher_id) {
     })
     let books = fetch_books.data.content
 
-    gtins = gtins.concat(books.map(book => book.gtin))
+    let currentBatch = books.reduce((approvedBooks, currentBook) => {
+      return currentBook.productType === "pbook"
+        ? approvedBooks.concat(currentBook.gtin)
+        : approvedBooks
+    }, [])
+
+    gtins = gtins.concat(currentBatch)
 
     isLastPage = fetch_books.data.last
     page = page + 1
@@ -81,7 +87,7 @@ async function getBooks() {
 }
 
 function translate_catalog(books) {
-  return books.map(book => {
+  return books.map((book) => {
     let entry = new Book(book)
 
     return entry.create()
