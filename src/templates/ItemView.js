@@ -3,10 +3,12 @@ import SEO from "../components/seo"
 
 import { SiteContext, ContextProviderComponent } from "../context/mainContext"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { graphql } from "gatsby"
 import Button from "../components/Button"
 
 const ItemView = (props) => {
-  const item = props.pageContext.content
+  const ean = props.pageContext.ean
+  const item = props.data.inventoryInfo
   const {
     price,
     cover,
@@ -14,7 +16,6 @@ const ItemView = (props) => {
     subtitle,
     authors,
     description,
-    ean,
     weight,
     width,
     height,
@@ -112,7 +113,7 @@ const ItemView = (props) => {
                 "Adicionar ao carrinho"
               )
             }
-            onClick={() => addItemToCart(item)}
+            onClick={() => addItemToCart(ean)}
           />
 
           <p className="mt-16 text-gray-500 text-xs">
@@ -133,5 +134,40 @@ function ItemViewWithContext(props) {
     </ContextProviderComponent>
   )
 }
+
+export const query = graphql`
+  query ($ean: String) {
+    inventoryInfo(ean: { eq: $ean }) {
+      id
+      price
+      name
+      subtitle
+      authors
+      description
+      categories
+      ean
+      weight
+      width
+      height
+      thickness
+      edition
+      publicationDate
+      format
+      keywords
+      brand
+      cover {
+        url {
+          childImageSharp {
+            gatsbyImageData(
+              layout: CONSTRAINED
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+            )
+          }
+        }
+      }
+    }
+  }
+`
 
 export default ItemViewWithContext

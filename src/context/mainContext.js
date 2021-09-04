@@ -12,8 +12,8 @@ const mainQuery = graphql`
 const SiteContext = React.createContext()
 
 class ContextProviderComponent extends React.Component {
-  addToCart = (item) => {
-    return window.DedalogCommerce.add(item.ean)
+  addToCart = (ean) => {
+    return window.DedalogCommerce.add(ean)
   }
 
   render() {

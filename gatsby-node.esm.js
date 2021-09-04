@@ -109,7 +109,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: slugify(item.name),
       component: ItemView,
       context: {
-        content: item,
+        ean: item.ean,
         title: item.name,
         type: "itemPage",
         previous,
