@@ -40,6 +40,7 @@ class Layout extends React.Component {
       `DedalogCommerce.configure({generateButtons: true});DedalogCommerce.create("${process.env.GATSBY_DEDALOG_COMMERCE_APIKEY}");`
     )
     script.setAttribute("type", "text/javascript")
+    script.setAttribute("defer", "defer")
     script.setAttribute("charset", "utf8")
     window.document.body.appendChild(script)
   }
