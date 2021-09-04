@@ -1,8 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 
 import SEO from "../components/seo"
 import ListItem from "../components/ListItem"
 import { slugify } from "../../utils/helpers"
+import InfiniteScroll from "react-infinite-scroll-component"
 
 import { graphql } from "gatsby"
 
@@ -10,14 +11,30 @@ const Home = ({ data: gqlData }) => {
   const { allInventoryInfo } = gqlData
   const inventory = allInventoryInfo.nodes
 
+  const showItems = 20
+  const [sliceItems, setSliceItems] = useState(showItems)
+  const [hasMore, setHasMore] = useState(true)
+
+  const fetchData = () => {
+    setSliceItems(sliceItems + showItems)
+    if (inventory.length <= sliceItems + showItems) {
+      setHasMore(false)
+    }
+  }
+
   return (
     <>
       <SEO title="Home" />
       <div className="flex flex-col items-center">
         <div className="max-w-fw min-w-full flex flex-col">
           <div>
-            <div className="flex flex-1 flex-wrap flex-row">
-              {inventory.map((item, index) => {
+            <InfiniteScroll
+              dataLength={sliceItems}
+              next={fetchData}
+              hasMore={hasMore}
+              className="flex flex-1 flex-wrap flex-row"
+            >
+              {inventory.slice(0, sliceItems).map((item, index) => {
                 return (
                   <ListItem
                     key={index}
@@ -29,7 +46,7 @@ const Home = ({ data: gqlData }) => {
                   />
                 )
               })}
-            </div>
+            </InfiniteScroll>
           </div>
         </div>
       </div>
