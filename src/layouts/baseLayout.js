@@ -37,7 +37,7 @@ class Layout extends React.Component {
     )
     script.setAttribute(
       "onLoad",
-      `DedalogCommerce.create("${process.env.GATSBY_DEDALOG_COMMERCE_APIKEY}");`
+      `DedalogCommerce.configure({generateButtons: true});DedalogCommerce.create("${process.env.GATSBY_DEDALOG_COMMERCE_APIKEY}");`
     )
     script.setAttribute("type", "text/javascript")
     script.setAttribute("charset", "utf8")
@@ -70,69 +70,64 @@ class Layout extends React.Component {
               <>
                 <div className="min-h-screen">
                   <nav>
-                    <div className="flex justify-center">
-                      <div
-                        className="
-                      w-fw
-                      items-center
-                      mobile:px-10 desktop:px-0 px-4 pt-10 pb-6
-                      flex flex-col
-                      sm:flex-row"
-                      >
+                    <div className="flex justify-center items-center">
+                      <div className="w-fw items-center mobile:px-10 desktop:px-10 mb-3 px-4 pt-10 pb-6 flex flex-col sm:flex-row">
                         <Link to="/">
                           <img
-                            className="mb-4 w-24 mw-24 sm:w-20 sm:mr-16"
+                            className="mb-0 w-52 sm:mr-16"
                             alt="Logo"
                             src={logo}
                           />
                         </Link>
-                        <div className="flex flex-wrap">
-                          {links.map((l, i) => (
-                            <Link to={l.link} key={i}>
-                              <p
-                                key={i}
-                                className="text-left m-0 text-smaller mr-4 sm:mr-8 font-semibold"
-                              >
-                                {l.name}
-                              </p>
-                            </Link>
-                          ))}
+
+                        <div className="relative rounded-md shadow-sm flex-grow mr-7">
+                          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg
+                              className="h-5 w-5 text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              />
+                            </svg>
+                          </div>
+                          <input
+                            type="text"
+                            placeholder="Pesquisar livros"
+                            value={this.state.search}
+                            className="w-full shadow appearance-none border-2 rounded py-2 px-3 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-red-500 transition duration-500 ease-in-out"
+                            onChange={(e) =>
+                              this.setState({ search: e.target.value })
+                            }
+                            onBlur={(e) => {
+                              this.state.search = ""
+                            }}
+                          />
                         </div>
-                        <div className="flex flex-1 justify-end pr-4 relative">
+
+                        <div className="flex pr-4">
                           <div id="dedalog-commerce"></div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex justify-center mb-5">
-                      <div className="relative rounded-md shadow-sm">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <svg
-                            className="h-5 w-5 text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            />
-                          </svg>
-                        </div>
-                        <input
-                          type="text"
-                          placeholder="Pesquisar livros"
-                          value={this.state.search}
-                          className="shadow appearance-none border-2 rounded py-2 px-3 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-red-500 transition duration-500 ease-in-out"
-                          onChange={(e) =>
-                            this.setState({ search: e.target.value })
-                          }
-                          onBlur={(e) => {
-                            this.state.search = ""
-                          }}
-                        />
+                    <div className="mb-5 flex justify-center">
+                      <div className="w-fw items-center mobile:px-10 desktop:px-10 px-4 flex flex-col sm:flex-row justify-between ">
+                        {links.map((l, i) => (
+                          <Link to={l.link} key={i}>
+                            <p
+                              key={i}
+                              className="text-left uppercase m-0 text-smaller mr-4 sm:mr-8 font-semibold"
+                            >
+                              {l.name}
+                            </p>
+                          </Link>
+                        ))}
                       </div>
                     </div>
                   </nav>

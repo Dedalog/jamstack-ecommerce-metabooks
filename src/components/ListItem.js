@@ -7,15 +7,15 @@ const ListItem = ({ link, title, authors, imageSrc, price }) => (
   <div
     className="
     w-100
-    md:w-1/2
-    lg:w-1/4
+    md:w-1/3
+    lg:w-1/5
     p1 sm:p-2
   "
   >
     <Link to={`/${link}`}>
-      <div className="h-72 flex justify-center items-center bg-light hover:bg-light-200">
+      <div className="h-72 flex justify-center items-center hover:bg-light-200">
         <div className="flex flex-column justify-center items-center">
-          <Image alt={title} src={imageSrc} className="max-h-112 mb-0 w-3/5" />
+          <Image alt={title} src={imageSrc} className="max-h-96 mb-0 w-8/12" />
         </div>
       </div>
     </Link>
