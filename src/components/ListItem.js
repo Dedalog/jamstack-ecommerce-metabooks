@@ -13,10 +13,13 @@ const ListItem = ({ link, title, authors, imageSrc, price }) => (
   "
   >
     <Link to={`/${link}`}>
-      <div className="h-72 flex justify-center items-center hover:bg-light-200">
-        <div className="flex flex-column justify-center items-center">
-          <Image alt={title} src={imageSrc} className="max-h-96 mb-0 w-8/12" />
-        </div>
+      <div className="flex justify-center items-center hover:bg-light-200">
+        <Image
+          alt={title}
+          src={imageSrc}
+          className="max-h-64 flex flex-column justify-center items-center"
+          imgClassName="mb-0 w-8/12"
+        />
       </div>
     </Link>
     <div>

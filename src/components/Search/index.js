@@ -9,7 +9,7 @@ export default function Search({ term }) {
   const Results = () => {
     const RenderedItems = []
 
-    results.map((result) => {
+    results.forEach((result) => {
       let item = result.item
 
       RenderedItems.push(

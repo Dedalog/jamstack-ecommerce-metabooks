@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 async function fetchImage(src, updateSrc) {
   // const image = await S3.getimage(src)
@@ -12,7 +12,9 @@ const Image = ({ src, ...props }) => {
     fetchImage(src, updateSrc)
   }, [])
 
-  return imageSrc ? <img src={imageSrc} {...props} /> : null
+  return imageSrc ? (
+    <GatsbyImage {...props} objectFit="contain" image={getImage(imageSrc)} />
+  ) : null
 }
 
 export default Image

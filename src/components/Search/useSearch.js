@@ -4,26 +4,36 @@ import Fuse from "fuse.js"
 export default function useSearch() {
   const data = useStaticQuery(graphql`
     query Search {
-      inventoryInfo {
-        data {
+      allInventoryInfo {
+        nodes {
           name
           ean
           price
           authors
-          image
+          cover {
+            url {
+              childImageSharp {
+                gatsbyImageData(
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP]
+                )
+              }
+            }
+          }
         }
       }
     }
   `)
 
-  const flatProductsData = data.inventoryInfo.data.map((data) => ({
+  const flatProductsData = data.allInventoryInfo.nodes.map((data) => ({
     resultType: "Products",
     id: data.ean,
     ean: data.ean,
     title: data.name,
     price: data.price,
     authors: data.authors,
-    image: data.image,
+    image: data.cover.url,
   }))
   const productFuse = new Fuse(flatProductsData, {
     keys: [

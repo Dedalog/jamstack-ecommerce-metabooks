@@ -7,11 +7,8 @@ import { slugify } from "../../utils/helpers"
 import { graphql } from "gatsby"
 
 const Home = ({ data: gqlData }) => {
-  const {
-    inventoryInfo,
-    categoryInfo: { data },
-  } = gqlData
-  const inventory = inventoryInfo.data
+  const { allInventoryInfo } = gqlData
+  const inventory = allInventoryInfo.nodes
 
   return (
     <>
@@ -28,7 +25,7 @@ const Home = ({ data: gqlData }) => {
                     title={item.name}
                     authors={item.authors}
                     price={item.price}
-                    imageSrc={item.image}
+                    imageSrc={item.cover.url}
                   />
                 )
               })}
@@ -52,9 +49,8 @@ export const pageQuery = graphql`
         itemCount
       }
     }
-    inventoryInfo {
-      data {
-        image
+    allInventoryInfo {
+      nodes {
         price
         brand
         name
@@ -63,6 +59,17 @@ export const pageQuery = graphql`
         description
         ean
         id
+        cover {
+          url {
+            childImageSharp {
+              gatsbyImageData(
+                layout: CONSTRAINED
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
+            }
+          }
+        }
       }
     }
   }

@@ -2,7 +2,7 @@ import React from "react"
 import ListItem from "../components/ListItem"
 import { titleIfy, slugify } from "../../utils/helpers"
 
-const CategoryView = props => {
+const CategoryView = (props) => {
   const {
     pageContext: {
       title,
@@ -27,7 +27,7 @@ const CategoryView = props => {
                     title={item.name}
                     authors={item.authors}
                     price={item.price}
-                    imageSrc={item.image}
+                    imageSrc={item.cover.url}
                   />
                 )
               })}

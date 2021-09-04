@@ -1,12 +1,62 @@
 import getInventory from "./providers/inventoryProvider.js"
 import { slugify } from "./utils/helpers"
+import { getHeader } from "./providers/inventoryHelper"
 
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const ItemView = require.resolve("./src/templates/ItemView")
 const CategoryView = require.resolve("./src/templates/CategoryView")
 
+exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
+  createTypes(`
+    type InventoryInfo implements Node {
+      cover: productImage
+    }
+    type productImage @dontInfer {
+      url: File @link(by: "url")
+    }
+  `)
+}
+
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const inventory = await getInventory()
+  const { data } = await graphql(`
+    query {
+      allInventoryInfo {
+        nodes {
+          id
+          price
+          name
+          subtitle
+          authors
+          description
+          categories
+          ean
+          weight
+          width
+          height
+          thickness
+          edition
+          publicationDate
+          format
+          keywords
+          brand
+          cover {
+            url {
+              childImageSharp {
+                gatsbyImageData(
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP]
+                )
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
+
+  const inventory = data.allInventoryInfo.nodes
 
   createPage({
     path: "all",
@@ -20,7 +70,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const inventoryByCategory = inventory.reduce((acc, next) => {
     const categories = next.categories
-    categories.forEach(c => {
+    categories.forEach((c) => {
       if (acc[c]) {
         acc[c].items.push(next)
       } else {
@@ -81,7 +131,7 @@ exports.sourceNodes = async ({
 
   const inventoryByCategory_temp = inventory.reduce((acc, next) => {
     const categories = next.categories
-    categories.forEach(c => {
+    categories.forEach((c) => {
       c = c.toLowerCase()
       if (acc[c]) {
         acc[c] += 1
@@ -93,12 +143,11 @@ exports.sourceNodes = async ({
   }, {})
 
   // Get only top 5 categories by item count
-  const sorted_categories = Object.keys(inventoryByCategory_temp).sort(function(
-    a,
-    b
-  ) {
-    return inventoryByCategory_temp[b] - inventoryByCategory_temp[a]
-  })
+  const sorted_categories = Object.keys(inventoryByCategory_temp).sort(
+    function (a, b) {
+      return inventoryByCategory_temp[b] - inventoryByCategory_temp[a]
+    }
+  )
   const categoryNames = sorted_categories.slice(0, 5)
 
   const navData = {
@@ -126,8 +175,8 @@ exports.sourceNodes = async ({
   const inventoryByCategory = inventory.reduce((acc, next) => {
     const categories = next.categories
 
-    categories.forEach(c => {
-      const index = acc.findIndex(item => item.name === c)
+    categories.forEach((c) => {
+      const index = acc.findIndex((item) => item.name === c)
       if (index !== -1) {
         const item = acc[index]
         item.itemCount = item.itemCount + 1
@@ -165,25 +214,35 @@ exports.sourceNodes = async ({
   const catNode = Object.assign({}, catData, catNodeMeta)
   createNode(catNode)
 
-  /* all inventory */
-  const inventoryData = {
-    key: "all-inventory",
-    data: inventory,
-  }
+  inventory.forEach((product) => {
+    createNode({
+      ...product,
+      id: createNodeId(`product-${product.ean}`),
+      internal: {
+        type: `InventoryInfo`,
+        mediaType: `json`,
+        contentDigest: createContentDigest(product),
+      },
+    })
+  })
+}
 
-  const inventoryNodeContent = JSON.stringify(inventoryData)
-  const inventoryNodeMeta = {
-    id: createNodeId(`my-data-${inventoryData.key}`),
-    parent: null,
-    children: [],
-    internal: {
-      type: `InventoryInfo`,
-      mediaType: `json`,
-      content: inventoryNodeContent,
-      contentDigest: createContentDigest(inventoryData),
-    },
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  store,
+  cache,
+  createNodeId,
+}) => {
+  if (node.internal.type === "InventoryInfo") {
+    node.cover = await createRemoteFileNode({
+      url: node.image,
+      parentNodeId: node.id,
+      httpHeaders: getHeader("cover"),
+      createNode,
+      createNodeId,
+      cache,
+      store,
+    })
   }
-
-  const inventoryNode = Object.assign({}, inventoryData, inventoryNodeMeta)
-  createNode(inventoryNode)
 }

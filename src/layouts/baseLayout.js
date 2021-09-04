@@ -133,7 +133,7 @@ class Layout extends React.Component {
                   </nav>
                   <div className="mobile:px-10 px-4 pb-10 flex justify-center">
                     <main className="w-fw">
-                      {this.state.search != "" ? (
+                      {this.state.search !== "" ? (
                         <Search term={this.state.search} />
                       ) : (
                         children
