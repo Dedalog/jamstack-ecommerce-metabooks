@@ -171,49 +171,6 @@ exports.sourceNodes = async ({
   const navNode = Object.assign({}, navData, navNodeMeta)
   createNode(navNode)
 
-  /* create category info for home page */
-  const inventoryByCategory = inventory.reduce((acc, next) => {
-    const categories = next.categories
-
-    categories.forEach((c) => {
-      const index = acc.findIndex((item) => item.name === c)
-      if (index !== -1) {
-        const item = acc[index]
-        item.itemCount = item.itemCount + 1
-        acc[index] = item
-      } else {
-        const item = {
-          name: c,
-          image: next.image,
-          itemCount: 1,
-        }
-        acc.push(item)
-      }
-    })
-    return acc
-  }, [])
-
-  const catData = {
-    key: "category-info",
-    data: inventoryByCategory,
-  }
-
-  const catNodeContent = JSON.stringify(catData)
-  const catNodeMeta = {
-    id: createNodeId(`my-data-${catData.key}`),
-    parent: null,
-    children: [],
-    internal: {
-      type: `CategoryInfo`,
-      mediaType: `json`,
-      content: catNodeContent,
-      contentDigest: createContentDigest(catData),
-    },
-  }
-
-  const catNode = Object.assign({}, catData, catNodeMeta)
-  createNode(catNode)
-
   inventory.forEach((product) => {
     createNode({
       ...product,
