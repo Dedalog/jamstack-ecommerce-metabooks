@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 import { numberFormat } from "../../utils/helpers"
-import Image from "./Image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const ListItem = ({ link, title, authors, imageSrc, price }) => (
   <div
@@ -14,11 +14,12 @@ const ListItem = ({ link, title, authors, imageSrc, price }) => (
   >
     <Link to={`/${link}`}>
       <div className="flex justify-center items-center hover:bg-light-200">
-        <Image
+        <GatsbyImage
           alt={title}
-          src={imageSrc}
           className="max-h-64 flex flex-column justify-center items-center"
           imgClassName="mb-0 w-8/12"
+          objectFit="contain"
+          image={getImage(imageSrc)}
         />
       </div>
     </Link>

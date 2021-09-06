@@ -25,13 +25,6 @@ export const pageQuery = graphql`
     navInfo {
       data
     }
-    categoryInfo {
-      data {
-        name
-        image
-        itemCount
-      }
-    }
   }
 `
 
