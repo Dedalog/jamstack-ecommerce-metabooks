@@ -9,17 +9,8 @@ import React from "react"
 import { Link } from "gatsby"
 import { SiteContext, ContextProviderComponent } from "../context/mainContext"
 import { titleIfy, slugify } from "../../utils/helpers"
-import "react-toastify/dist/ReactToastify.css"
-import { toast } from "react-toastify"
-import { colors } from "../theme"
 import logo from "../images/logo.png"
 import Search from "../components/Search"
-
-toast.configure({
-  progressStyle: {
-    background: colors.primary,
-  },
-})
 
 class Layout extends React.Component {
   constructor(props) {
