@@ -1,14 +1,12 @@
 import React from "react"
 import ListItem from "../components/ListItem"
 import { titleIfy, slugify } from "../../utils/helpers"
+import { graphql } from "gatsby"
 
 const CategoryView = (props) => {
-  const {
-    pageContext: {
-      title,
-      content: { items = [] },
-    },
-  } = props
+  const items = props.data.allInventoryInfo.nodes
+  const title = props.pageContext.title
+
   return (
     <>
       <div className="flex flex-col items-center">
@@ -38,5 +36,29 @@ const CategoryView = (props) => {
     </>
   )
 }
+
+export const query = graphql`
+  query ($category: [String]) {
+    allInventoryInfo(filter: { categories: { in: $category } }) {
+      nodes {
+        id
+        price
+        name
+        authors
+        cover {
+          url {
+            childImageSharp {
+              gatsbyImageData(
+                layout: CONSTRAINED
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+              )
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default CategoryView

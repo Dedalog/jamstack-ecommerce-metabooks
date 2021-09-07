@@ -58,16 +58,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const inventory = data.allInventoryInfo.nodes
 
-  createPage({
-    path: "all",
-    component: CategoryView,
-    context: {
-      content: inventory,
-      title: "all",
-      type: "categoryPage",
-    },
-  })
-
   const inventoryByCategory = inventory.reduce((acc, next) => {
     const categories = next.categories
     categories.forEach((c) => {
@@ -92,7 +82,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: slugify(category),
       component: CategoryView,
       context: {
-        content: inventoryByCategory[category],
+        category: category,
         title: category,
         type: "categoryPage",
         previous,
