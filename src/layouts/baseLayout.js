@@ -17,7 +17,14 @@ class Layout extends React.Component {
     super(props)
     this.state = {
       search: "",
+      mobileMenu: false,
     }
+
+    this.toggleMobileMenu = this.toggleMobileMenu.bind(this)
+  }
+
+  toggleMobileMenu() {
+    this.setState({ mobileMenu: !this.state.mobileMenu })
   }
 
   componentDidMount() {
@@ -63,16 +70,16 @@ class Layout extends React.Component {
                 <div className="min-h-screen">
                   <nav>
                     <div className="flex justify-center items-center">
-                      <div className="w-fw items-center mobile:px-10 desktop:px-10 mb-3 px-4 pt-10 pb-6 flex flex-col sm:flex-row">
+                      <div className="w-fw items-center mobile:px-10 desktop:px-10 mb-3 px-4 pt-10 pb-0 flex flex-col sm:flex-row">
                         <Link to="/">
                           <img
-                            className="mb-0 w-52 sm:mr-16"
+                            className="mb-4 sm:mb-0 w-52 sm:mr-16"
                             alt="Logo"
                             src={logo}
                           />
                         </Link>
 
-                        <div className="relative rounded-md shadow-sm flex-grow mr-7">
+                        <div className="mb-4 sm:mb-0 relative rounded-md shadow-sm flex-grow mr-7">
                           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg
                               className="h-5 w-5 text-gray-400"
@@ -103,12 +110,50 @@ class Layout extends React.Component {
                         </div>
 
                         <div className="flex pr-4">
+                          {/* Mobile menu button */}
+                          <div className="md:hidden flex items-center mb-4">
+                            <button
+                              className="outline-none mobile-menu-button"
+                              onClick={this.toggleMobileMenu}
+                            >
+                              <svg
+                                className="w-6 h-6 text-gray-500"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                              >
+                                <path d="M4 6h16M4 12h16M4 18h16"></path>
+                              </svg>
+                            </button>
+                          </div>
+                          {/* End Mobile menu button */}
+
                           <div id="dedalog-commerce"></div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="mb-5 flex justify-center">
+                    {this.state.mobileMenu && (
+                      <div className="mobile-menu py-3 mb-5 bg-gray-100">
+                        <ul>
+                          {links.map((l, i) => (
+                            <Link to={l.link} key={i}>
+                              <li
+                                key={i}
+                                className="text-center uppercase m-0 text-smaller mr-4 sm:mr-8 font-semibold"
+                              >
+                                {l.name}
+                              </li>
+                            </Link>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="hidden md:flex mb-5 mt-3 justify-center">
                       <div className="w-fw items-center mobile:px-10 desktop:px-10 px-4 flex flex-col sm:flex-row justify-between ">
                         {links.map((l, i) => (
                           <Link to={l.link} key={i}>

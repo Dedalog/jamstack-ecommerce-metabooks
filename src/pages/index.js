@@ -11,9 +11,7 @@ const Home = ({ data: gqlData }) => {
       <SEO title="Home" />
       <div className="flex flex-col items-center">
         <div className="max-w-fw min-w-full flex flex-col">
-          <div>
-            <Catalog />
-          </div>
+          <Catalog />
         </div>
       </div>
     </>

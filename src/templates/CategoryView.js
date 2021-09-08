@@ -16,7 +16,7 @@ const CategoryView = (props) => {
           </div>
 
           <div>
-            <div className="flex flex-1 flex-wrap flex-row">
+            <div className="flex flex-1 flex-wrap flex-col sm:flex-row">
               {items.map((item, index) => {
                 return (
                   <ListItem

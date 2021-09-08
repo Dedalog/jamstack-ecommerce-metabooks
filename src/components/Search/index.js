@@ -31,7 +31,7 @@ export default function Search({ term }) {
     <div className="flex flex-col items-center">
       <div className="max-w-fw min-w-full flex flex-col">
         <div>
-          <div className="flex flex-1 flex-wrap flex-row">
+          <div className="flex flex-1 flex-wrap flex-col sm:flex-row">
             <Results />
           </div>
         </div>

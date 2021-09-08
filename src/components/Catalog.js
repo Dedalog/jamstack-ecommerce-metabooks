@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component"
 const Catalog = () => {
   const data = useStaticQuery(graphql`
     query {
-      allInventoryInfo {
+      allInventoryInfo(sort: { order: ASC, fields: name }) {
         nodes {
           price
           name
@@ -48,7 +48,7 @@ const Catalog = () => {
       dataLength={sliceItems}
       next={fetchData}
       hasMore={hasMore}
-      className="flex flex-1 flex-wrap flex-row"
+      className="flex flex-1 flex-wrap flex-col sm:flex-row"
     >
       {inventory.slice(0, sliceItems).map((item, index) => {
         return (
