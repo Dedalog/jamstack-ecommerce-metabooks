@@ -58,7 +58,7 @@ const Catalog = () => {
             title={item.name}
             authors={item.authors}
             price={item.price}
-            imageSrc={item.cover.url}
+            imageSrc={item.cover ? item.cover.url : null}
           />
         )
       })}

@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import SEO from "../components/seo"
 
 import { SiteContext, ContextProviderComponent } from "../context/mainContext"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
 import { graphql } from "gatsby"
 import Button from "../components/Button"
 
@@ -48,13 +48,23 @@ const ItemView = (props) => {
       my-0 mx-auto"
       >
         <div className="w-full md:w-1/2 h-112 flex flex-1 bg-light hover:bg-light-200">
-          <GatsbyImage
-            alt={name}
-            className="my-8 p10 flex flex-1 justify-center items-center"
-            imgClassName="m-0 max-h-96 w-auto"
-            objectFit="contain"
-            image={getImage(cover.url)}
-          />
+          {cover ? (
+            <GatsbyImage
+              alt={name}
+              className="my-8 p10 flex flex-1 justify-center items-center"
+              imgClassName="m-0 max-h-96 w-auto"
+              objectFit="contain"
+              image={getImage(cover.url)}
+            />
+          ) : (
+            <StaticImage
+              className="my-8 p10 flex flex-1 justify-center items-center"
+              imgClassName="m-0 max-h-96 w-auto"
+              src="../images/cover_placeholder.png"
+              objectFit="contain"
+              alt="placeholder cover"
+            />
+          )}
         </div>
         <div className="pt-2 px-0 md:px-10 pb-8 w-full md:w-1/2">
           {authors ? (

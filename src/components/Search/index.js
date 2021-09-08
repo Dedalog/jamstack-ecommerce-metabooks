@@ -19,7 +19,7 @@ export default function Search({ term }) {
           title={item.title}
           authors={item.authors}
           price={item.price}
-          imageSrc={item.image}
+          imageSrc={item.image ? item.image.url : null}
         />
       )
     })

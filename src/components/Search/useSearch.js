@@ -33,7 +33,7 @@ export default function useSearch() {
     title: data.name,
     price: data.price,
     authors: data.authors,
-    image: data.cover.url,
+    image: data.cover,
   }))
   const productFuse = new Fuse(flatProductsData, {
     keys: [
